@@ -1,3 +1,6 @@
+const path = require('path');
+
+
 module.exports = (app) => {
 
   app.get('/', (req, res) => {
@@ -6,6 +9,6 @@ module.exports = (app) => {
 
   //catchall
   app.all('*', (req, res) => {
-    return res.status(404).json({status: 'ru roh'});
+    return res.status(404).sendFile(path.join(__dirname, '../static/404.html'));
   });
 };
