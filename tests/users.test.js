@@ -1,10 +1,25 @@
 const addUser = require('../models/users/addUser');
 const login = require('../models/users/login');
+const logout = require('../models/users/logout');
 
 let req = {
       session: {},
       body: {}
     };
+
+describe('/models/logout', () => {
+  test('logout: it lets you log out', () => {
+    req.session = {
+      id: 123,
+      loggedIn: true
+    };
+    return logout(req)
+    .then(resp => {
+      console.log(Object.keys(resp.req.session).length);
+      expect(Object.keys(resp.req.session).length).toBe(0);
+    });
+  });
+});
 
 describe('/models/addUser', () => {
   test('addUser: it stops if there are blank fields', () => {
@@ -112,4 +127,6 @@ describe('/models/addUser', () => {
       expect(resp.req.session.id).toBe('2ac346373b180a119095ee01a0e14228');
     });
   });
+
+
 });
