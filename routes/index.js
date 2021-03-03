@@ -1,11 +1,13 @@
 const path = require('path');
+const userscontroller = require('../controllers').users;
 
 
 module.exports = (app) => {
 
-  app.get('/', (req, res) => {
-    return res.status(200).json({status: 'helloooo dolly'});
-  });
+  //all users
+  app.get('/', userscontroller.ping);
+
+  //restricted to logged in
 
   //catchall
   app.all('*', (req, res) => {
