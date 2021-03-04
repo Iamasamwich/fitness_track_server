@@ -33,7 +33,7 @@ describe('Session functions...', () => {
 
   test('addSession: it fails with the wrong data types', () => {
     req.body = {
-      sessionTime: 123,
+      date: 123,
       distance: 'abc',
       time: 'abc',
       weight: 'abc',
@@ -49,7 +49,7 @@ describe('Session functions...', () => {
 
   test('addSession: it fails with an incorrect date format for sessionTime', () => {
     req.body = {
-      sessionTime: '2020',
+      date: '2020',
       distance: 123,
       time: 123,
       weight: 123,
@@ -81,7 +81,7 @@ describe('Session functions...', () => {
     const req2 = {...req, 
       session: {id: '123', loggedIn: true}, 
       body: {
-        sessionTime: '2020-03-06 11:15:00',
+        date: '2020-03-06',
         distance: 12.25,
         time: 1800,
         weight: 72,
@@ -98,7 +98,7 @@ describe('Session functions...', () => {
 
   test('addSession: you can create a session from 10 seconds ago', () => {
     req.body = {
-      sessionTime: '2020-03-06 11:15:00',
+      date: '2020-03-06',
       distance: 12.25,
       time: 1800,
       weight: 72,

@@ -15,7 +15,7 @@ module.exports = (req) => {
 
     if (
       !req.body ||
-      !req.body.sessionTime ||
+      !req.body.date ||
       !req.body.distance ||
       !req.body.time ||
       !req.body.weight ||
@@ -25,7 +25,7 @@ module.exports = (req) => {
 
     if (
       !typing(req.body, 'object') ||
-      !typing(req.body.sessionTime, 'string') ||
+      !typing(req.body.date, 'string') ||
       !typing(req.body.distance, 'number') ||
       !typing(req.body.time, 'number') ||
       !typing(req.body.weight, 'number') ||
@@ -34,7 +34,7 @@ module.exports = (req) => {
     ) throw error (406);
     
     if (
-      !req.body.sessionTime.match(/^\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2}$/)
+      !req.body.date.match(/^\d{4}-\d{2}-\d{2}$/)
     ) throw error(406);
 
     return;
@@ -55,7 +55,7 @@ module.exports = (req) => {
     const m = `INSERT INTO session SET ?;`;
     const p = {
       userId: id,
-      sessionTime: req.body.sessionTime,
+      date: req.body.date,
       distance: req.body.distance,
       time: req.body.time,
       weight: req.body.weight,
