@@ -33,10 +33,43 @@ module.exports = (req) => {
       !typing(req.body.notes, 'string')
     ) throw error (406);
     
+    if (
+      !req.body.sessionTime.match(/^\d{4}-\d{2}-\d{2}\s{1}\d{2}:\d{2}:\d{2}$/)
+    ) throw error(406);
+
     return;
   };
 
+  async function checkUser(id) {
+    const m = `
+      SELECT * FROM user
+      WHERE id = ?;
+    `;
+    const p = id;
+    const resp = await conn.send(m,p);
+    if (resp.length === 0) throw error(404);
+    return resp[0].id;
+  };
+
+  async function addSession(id) {
+    const m = `INSERT INTO session SET ?;`;
+    const p = {
+      userId: id,
+      sessionTime: req.body.sessionTime,
+      distance: req.body.distance,
+      time: req.body.time,
+      weight: req.body.weight,
+      route: req.body.route,
+      notes: req.body.notes
+    };
+    const resp = await conn.send(m,p);
+    return;
+  }
+
   return validate()
+  .then(() => checkUser(req.session.id))
+  .then(id => addSession(id))
+  .then(() => ({status: 201, message: 'Session Created'}))
   .catch(err => {
     throw err;
   })

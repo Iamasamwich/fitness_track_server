@@ -10,6 +10,7 @@ let req = {
       body: {}
     };
 
+
 describe('User functions...', () => {
   test('logout: it lets you log out', () => {
     req.session = {
@@ -211,16 +212,10 @@ describe('User functions...', () => {
     });
   });
 
-
-
-
-
-
-
-
-
-
   test('deleteUser: it deletes the test user', () => {
-    return deleteUser(id);
+    return deleteUser(id)
+    .then(resp => {
+      expect(resp).toBe('hello');
+    });
   });
 });

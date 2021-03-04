@@ -13,7 +13,7 @@ module.exports = (id) => {
     return;
   }
 
-  deleteUser()
+  return deleteUser()
   .then(() => "hello")
   .finally(() => {
     conn.end();
