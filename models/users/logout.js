@@ -1,4 +1,5 @@
 module.exports = (req) => {
+  
   async function logout () {
     delete req.session.loggedIn;
     delete req.session.id;

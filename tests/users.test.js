@@ -1,13 +1,16 @@
 const addUser = require('../models/users/addUser');
 const login = require('../models/users/login');
 const logout = require('../models/users/logout');
+const updatePassword = require('../models/users/updatePassword');
+const deleteUser = require('../models/users/deleteUser');
+let id;
 
 let req = {
       session: {},
       body: {}
     };
 
-describe('/models/logout', () => {
+describe('User functions...', () => {
   test('logout: it lets you log out', () => {
     req.session = {
       id: 123,
@@ -15,13 +18,10 @@ describe('/models/logout', () => {
     };
     return logout(req)
     .then(resp => {
-      console.log(Object.keys(resp.req.session).length);
       expect(Object.keys(resp.req.session).length).toBe(0);
     });
   });
-});
 
-describe('/models/addUser', () => {
   test('addUser: it stops if there are blank fields', () => {
     return addUser(req)
     .catch(resp => {
@@ -62,10 +62,14 @@ describe('/models/addUser', () => {
       name: 'Added User',
       pword: 'password',
     };
-    return addUser(req)
+    return logout(req)
+    .then(() => addUser(req))
     .then(resp => {
+      id = resp.req.session.id;
       expect(resp.status).toBe(201);
       expect(resp.message).toBe('User Added');
+      expect(resp.req.session.id).toBeTruthy();
+      expect(resp.req.session.loggedIn).toBe(true);
     });
   });
   
@@ -121,12 +125,103 @@ describe('/models/addUser', () => {
     };
     return login(req)
     .then(resp => {
+      req = resp.req;
       expect(resp.status).toBe(202);
       expect(resp.message).toBe('Logged In');
       expect(resp.req.session.loggedIn).toBe(true);
-      expect(resp.req.session.id).toBe('2ac346373b180a119095ee01a0e14228');
+      expect(resp.req.session.id).toBe(id);
+    });
+  });
+
+  test('updatePassword: it fails with no session', () => {
+    req2 = {
+      session: {},
+      body: {}
+    };
+    return updatePassword(req2)
+    .catch(resp => {
+      expect(resp.status).toBe(401);
+      expect(resp.message).toBe('Not Authorised');
+    })
+  });
+
+  test('updatePassword: it wont work with missing fields', () => {
+    req2.session = {
+      loggedIn: true,
+      id: '123'
+    };
+    return updatePassword(req2)
+    .catch(resp => {
+      expect(resp.status).toBe(406);
+      expect(resp.message).toBe('Not Acceptable');
+    });
+  });
+
+  test('updatePassword: it wont work with an incorrect id', () => {
+    req2.body = {
+      pword: 'doesntmatter',
+      newPword: 'still doesnt matter'
+    }
+    return updatePassword(req2)
+    .catch(resp => {
+      expect(resp.status).toBe(404);
+      expect(resp.message).toBe('Not Found');
+    });
+  });
+
+  test('updatePassword: it wont work with an incorrect password', () => {
+    req2 = {...req};
+    req2.body = {
+      pword: 'wrongPassword',
+      newPword: 'doesnt matter'
+    };
+    return updatePassword(req2)
+    .catch(resp => {
+      expect(resp.status)
+    })
+  });
+
+  test('updatePassword: it updates the password', () => {
+    req.body = {
+      pword: 'password',
+      newPword: 'newPassword'
+    };
+    return updatePassword(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+      expect(resp.message).toBe('Password Updated');
+    });
+  });
+
+  test('login: it lets you log in with the new password', () => {
+    return logout(req)
+    .then(resp => {
+      req = resp.req;
+      req.body = {
+        email: 'testAddUser@test.com',
+        pword: 'newPassword'
+      }
+      console.log('yy', req);
+    })
+    .then(() => login(req))
+    .then(resp => {
+      expect(resp.status).toBe(202);
+      expect(resp.message).toBe('Logged In');
+      expect(resp.req.session.loggedIn).toBe(true);
+      expect(resp.req.session.id).toBe(id);
     });
   });
 
 
+
+
+
+
+
+
+
+
+  test('deleteUser: it deletes the test user', () => {
+    return deleteUser(id);
+  });
 });
