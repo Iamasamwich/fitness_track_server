@@ -201,7 +201,6 @@ describe('User functions...', () => {
         email: 'testAddUser@test.com',
         pword: 'newPassword'
       }
-      console.log('yy', req);
     })
     .then(() => login(req))
     .then(resp => {

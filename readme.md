@@ -12,7 +12,7 @@ pword - varchar (255) (hashed)
 ## session
 id - integer (auto increment) PK
 userId - varchar (255) (hashed email) FK
-date - char(8) (yyyymmdd)
+sessionTime - DATETIME
 distance - float (kk.mm)
 time - int (seconds)
 weight - int (kg)
@@ -26,12 +26,4 @@ browser - varchar (255)
 ip - varchar (20)
 timestamp
 
-# routes
-## anon access
-/         GET 
-/login    POST body:{email, password}
-/logout   GET
-/adduser  POST body:{email, name, password}
 
-## logged in access
-/addsession   POST body:{date, distance, time, weight, route, notes}
