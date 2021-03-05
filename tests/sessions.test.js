@@ -3,7 +3,11 @@ const deleteUser = require('../models/users/deleteUser');
 const login = require('../models/users/login');
 const logout = require('../models/users/logout');
 
+const makeDate = require('../models/logic/makeDate');
+
 const addSession = require('../models/sessions/addSession');
+const getMonthSessions = require('../models/sessions/getMonthSessions');
+const getAllSessions = require('../models/sessions/getAllSessions');
 
 let req = {
   session: {},
@@ -96,9 +100,23 @@ describe('Session functions...', () => {
     });
   });
 
-  test('addSession: you can create a session from 10 seconds ago', () => {
+  test('getMonthSessions: it will 404 if there are no sessions', () => {
+    return getMonthSessions(req)
+    .catch(resp => {
+      expect(resp.status).toBe(404);
+    });
+  });
+
+  test('getAllSessions: it will 404 if there are no sessions', () => {
+    return getAllSessions(req)
+    .catch(resp => {
+      expect(resp.status).toBe(404);
+    });
+  });
+
+  test('addSession: you can create a session from now', () => {
     req.body = {
-      date: '2020-03-06',
+      date: makeDate(0),
       distance: 12.25,
       time: 1800,
       weight: 72,
@@ -112,6 +130,60 @@ describe('Session functions...', () => {
     });
   });
 
+  test('addSession: create a session from 2 days ago', () => {
+    req.body.date = makeDate(2);
+    return addSession(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+    });
+  });
+
+  test('addSession: create session from 45 days ago', () => {
+    req.body.date = makeDate(45);
+    return addSession(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+    });
+  });
+
+  test('getMonthSessions: it fails with no req.session', () => {
+    const req2 = {
+      session: {}
+    };
+    return getMonthSessions(req2)
+    .catch(resp => {
+      expect(resp.status).toBe(401);
+    });
+  });
+
+  test('getMonthSessions: it gets the sessions in the last 30 days', () => {
+    delete req.body;
+    return getMonthSessions(req)
+    .then(resp => {
+      expect(resp.status).toBe(200);
+      expect(resp.message).toBe('Sessions Retrieved');
+      expect(resp.sessions.length).toBe(2);
+    });
+  });
+
+  test('getAllSessions: 401 if no req.session data', () => {
+    const req2 = {
+      session: {}
+    };
+    return getAllSessions(req2)
+    .catch(resp => {
+      expect(resp.status).toBe(401);
+    });
+  });
+
+  test('getAllSessions: it gets all the sessions for the user', () => {
+    return getAllSessions(req)
+    .then(resp => {
+      expect(resp.status).toBe(200);
+      expect(resp.message).toBe('Sessions Retrieved');
+      expect(resp.sessions.length).toBe(3);
+    });
+  });
 
   test('delete the test user', () => {
     return deleteUser(req.session.id)
@@ -119,7 +191,4 @@ describe('Session functions...', () => {
       expect(resp).toBe('hello');;
     });
   });
-
-
-
 });

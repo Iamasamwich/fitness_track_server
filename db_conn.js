@@ -8,6 +8,7 @@ class Conn {
       password: "root",
       database: "FitnessTrack",
       port: 3306,
+      dateStrings: 'date'
     };
     this.conn = mysql.createConnection(this.config);
   }
