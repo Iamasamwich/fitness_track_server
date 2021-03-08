@@ -205,6 +205,32 @@ describe('Session functions...', () => {
     });
   });
 
+  test('getMonthSessions: should now only have 1 result', () => {
+    delete req.body;
+    return getMonthSessions(req)
+    .then(resp => {
+      expect(resp.status).toBe(200);
+      expect(resp.sessions.length).toBe(1);
+    });
+  });
+
+  test('getAllSessions: should still have 3 in it', () => {
+    return getAllSessions(req)
+    .then(resp => {
+      expect(resp.status).toBe(200);
+      expect(resp.sessions.length).toBe(3);
+    });
+  });
+
+  test('getAllSessions: the sessions are retrieved in date order', () => {
+    return getAllSessions(req)
+    .then(resp => {
+      expect(resp.status).toBe(200);
+      expect(resp.sessions[2].date > resp.sessions[1].date).toBe(true);
+      expect(resp.sessions[1].date > resp.sessions[0].date).toBe(true);
+    });
+  });
+
   test('delete the test user', () => {
     return deleteUser(req.session.id)
     .then(resp => {

@@ -18,7 +18,8 @@ module.exports = (req) => {
       SELECT * FROM session
       WHERE userId = ?
       AND
-      TIMESTAMPDIFF(day, date, ?) < 30;
+      TIMESTAMPDIFF(day, date, ?) < 30
+      ORDER BY session.date;
     `;
     const p = [req.session.id, date];
     const resp = await conn.send(m,p);

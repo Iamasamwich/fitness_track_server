@@ -15,7 +15,8 @@ module.exports = (req) => {
   async function getSessions() {
     const m = `
       SELECT * FROM session
-      WHERE userId = ?;
+      WHERE userId = ?
+      ORDER BY session.date;
     `;
     const p = req.session.id;
     const resp = await conn.send(m,p);
