@@ -18,12 +18,13 @@ module.exports = (req) => {
       SELECT * FROM session
       WHERE userId = ?
       AND
-      TIMESTAMPDIFF(day, date, ?);
+      TIMESTAMPDIFF(day, date, ?) < 30;
     `;
     const p = [req.session.id, date];
     const resp = await conn.send(m,p);
     if (resp.length === 0) throw error(404);
     const stringedResp = resp.map(session => {
+      delete session.userId;
       return {...session, route: session.route.toString(), notes: session.notes.toString()}
     });
     return stringedResp;

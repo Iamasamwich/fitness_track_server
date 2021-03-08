@@ -8,11 +8,14 @@ const makeDate = require('../models/logic/makeDate');
 const addSession = require('../models/sessions/addSession');
 const getMonthSessions = require('../models/sessions/getMonthSessions');
 const getAllSessions = require('../models/sessions/getAllSessions');
+const editSession = require('../models/sessions/editSession');
 
 let req = {
   session: {},
   body: {}
 };
+
+let sessionToEdit;
 
 describe('Session functions...', () => {
   test('addSession: it fails with no session', () => {
@@ -160,6 +163,7 @@ describe('Session functions...', () => {
     delete req.body;
     return getMonthSessions(req)
     .then(resp => {
+      sessionToEdit = resp.sessions[1];
       expect(resp.status).toBe(200);
       expect(resp.message).toBe('Sessions Retrieved');
       expect(resp.sessions.length).toBe(2);
@@ -182,6 +186,22 @@ describe('Session functions...', () => {
       expect(resp.status).toBe(200);
       expect(resp.message).toBe('Sessions Retrieved');
       expect(resp.sessions.length).toBe(3);
+    });
+  });
+
+  test('editSession: it lets you edit a session', () => {
+    req = {...req, body: sessionToEdit};
+    req.body.date = makeDate(365);
+    req.body.distance = 300,
+    req.body.time = 500000,
+    req.body.weight = 75,
+    req.body.route = "To the moon and back";
+    req.body.notes = "not a lot of air up there..."
+    
+    return editSession(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+      expect(resp.message).toBe('Session Updated');
     });
   });
 

@@ -1,4 +1,5 @@
 const error = require('../models/logic/error');
+const isADate = require('../models/logic/isADate');
 
 describe('/models/logic/error.js', () => {
   test('It handles no parameters', () => {
@@ -56,5 +57,20 @@ describe('/models/logic/error.js', () => {
     const resp = error(500);
     expect(resp.status).toBe(500);
     expect(resp.message).toBe('Server Error');
+  });
+});
+
+describe('/models/logic/isADate.js', () => {
+  test('it returns true for a good date', () => {
+    const resp = isADate("2021-03-02");
+    expect(resp).toBe(true);
+  });
+  test('it returns false for something that isnt a date', () => {
+    const resp = isADate('asdadsf');
+    expect(resp).toBe(false);
+  });
+  test('it returns false if using the american format', () => {
+    const resp = isADate("2021-13-03");
+    expect(resp).toBe(false);
   });
 });

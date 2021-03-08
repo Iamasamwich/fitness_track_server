@@ -21,6 +21,7 @@ module.exports = (req) => {
     const resp = await conn.send(m,p);
     if (resp.length === 0) throw error(404);
     const stringedResp = resp.map(session => {
+      delete session.userId;
       return {...session, route: session.route.toString(), notes: session.notes.toString()};
     });
     return stringedResp;
