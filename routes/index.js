@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   //all users
   app.get('/', userscontroller.ping);
+  app.post('/login', userscontroller.login);
 
   //restricted to logged in
 

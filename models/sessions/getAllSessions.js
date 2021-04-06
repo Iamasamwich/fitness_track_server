@@ -7,7 +7,7 @@ module.exports = (req) => {
   async function validate () {
     if (
       !req.session ||
-      !req.session.id ||
+      !req.session.userId ||
       !req.session.loggedIn
     ) throw error(401);
   };
@@ -18,7 +18,7 @@ module.exports = (req) => {
       WHERE userId = ?
       ORDER BY session.date;
     `;
-    const p = req.session.id;
+    const p = req.session.userId;
     const resp = await conn.send(m,p);
     if (resp.length === 0) throw error(404);
     const stringedResp = resp.map(session => {

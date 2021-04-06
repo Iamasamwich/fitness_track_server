@@ -2,15 +2,13 @@ const Conn = require('../../db_conn');
 const error = require('../logic/error');
 const bcrypt = require('bcrypt');
 
-// body: {pword, newPword};
-
 module.exports = (req) => {
   const conn = new Conn();
 
   async function validate () {
     if (
       !req.session ||
-      !req.session.id ||
+      !req.session.userId ||
       !req.session.loggedIn
     ) throw error (401);
     if (
@@ -26,7 +24,7 @@ module.exports = (req) => {
       SELECT * FROM user
       WHERE id = ?;
     `;
-    const p = req.session.id;
+    const p = req.session.userId;
     const resp = conn.send(m, p);
     if (resp.length === 0) throw error(404);
     return resp[0];
@@ -45,7 +43,7 @@ module.exports = (req) => {
       {
         pword: pwHash,
       },
-      req.session.id
+      req.session.userId
     ];
     return conn.send(m, p);
   };

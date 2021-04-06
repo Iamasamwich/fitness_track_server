@@ -10,7 +10,7 @@ module.exports = (req) => {
   async function validate () {
     if (
       !req.session ||
-      !req.session.id ||
+      !req.session.userId ||
       !req.session.loggedIn
     ) throw error(401);
 
@@ -43,21 +43,21 @@ module.exports = (req) => {
     return;
   };
 
-  async function checkUser(id) {
+  async function checkUser(userId) {
     const m = `
       SELECT * FROM user
       WHERE id = ?;
     `;
-    const p = id;
+    const p = userId;
     const resp = await conn.send(m,p);
     if (resp.length === 0) throw error(404);
     return resp[0].id;
   };
 
-  async function addSession(id) {
+  async function addSession(userId) {
     const m = `INSERT INTO session SET ?;`;
     const p = {
-      userId: id,
+      userId,
       date: req.body.date,
       distance: req.body.distance,
       time: req.body.time,
@@ -70,8 +70,8 @@ module.exports = (req) => {
   }
 
   return validate()
-  .then(() => checkUser(req.session.id))
-  .then(id => addSession(id))
+  .then(() => checkUser(req.session.userId))
+  .then(userId => addSession(userId))
   .then(() => ({status: 201, message: 'Session Created'}))
   .catch(err => {
     throw err;

@@ -10,7 +10,7 @@ module.exports = (req) => {
   async function validate() {
     if (
       !req.session ||
-      !req.session.id ||
+      !req.session.userId ||
       !req.session.loggedIn
     ) throw error(401);
 
@@ -57,7 +57,7 @@ module.exports = (req) => {
   };
 
   async function checkUser(session) {
-    if (session.userId !== req.session.id) throw error(401);
+    if (session.userId !== req.session.userId) throw error(401);
     return;
   }
 

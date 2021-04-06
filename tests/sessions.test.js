@@ -28,7 +28,7 @@ describe('Session functions...', () => {
 
   test('addSession: it fails if there is nothing in the body', () => {
     req.session = {
-      id: '123',
+      userId: '123',
       loggedIn: true
     };
     return addSession(req)
@@ -86,7 +86,7 @@ describe('Session functions...', () => {
 
   test('addSession: it will 404 with an incorrect userId in session', () => {
     const req2 = {...req, 
-      session: {id: '123', loggedIn: true}, 
+      session: {userId: '123', loggedIn: true}, 
       body: {
         date: '2020-03-06',
         distance: 12.25,
@@ -232,7 +232,7 @@ describe('Session functions...', () => {
   });
 
   test('delete the test user', () => {
-    return deleteUser(req.session.id)
+    return deleteUser(req.session.userId)
     .then(resp => {
       expect(resp).toBe('hello');;
     });

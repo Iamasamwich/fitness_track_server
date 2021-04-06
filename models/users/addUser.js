@@ -47,7 +47,7 @@ module.exports = (req) => {
       })
     };
     const resp = await conn.send(m, p);
-    req.session.id = id;
+    req.session.userId = id;
     req.session.loggedIn = true;
     return;
   }

@@ -36,7 +36,7 @@ module.exports = (req) => {
       delete req.session.id;
       throw error(401, req);
     };
-    req.session.id = user.id;
+    req.session.userId = user.id;
     req.session.loggedIn = true;
     return;
   }

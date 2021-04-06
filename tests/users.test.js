@@ -14,7 +14,7 @@ let req = {
 describe('User functions...', () => {
   test('logout: it lets you log out', () => {
     req.session = {
-      id: 123,
+      userId: 123,
       loggedIn: true
     };
     return logout(req)
@@ -66,10 +66,10 @@ describe('User functions...', () => {
     return logout(req)
     .then(() => addUser(req))
     .then(resp => {
-      id = resp.req.session.id;
+      id = resp.req.session.userId;
       expect(resp.status).toBe(201);
       expect(resp.message).toBe('User Added');
-      expect(resp.req.session.id).toBeTruthy();
+      expect(resp.req.session.userId).toBeTruthy();
       expect(resp.req.session.loggedIn).toBe(true);
     });
   });
@@ -130,7 +130,7 @@ describe('User functions...', () => {
       expect(resp.status).toBe(202);
       expect(resp.message).toBe('Logged In');
       expect(resp.req.session.loggedIn).toBe(true);
-      expect(resp.req.session.id).toBe(id);
+      expect(resp.req.session.userId).toBe(id);
     });
   });
 
@@ -149,7 +149,7 @@ describe('User functions...', () => {
   test('updatePassword: it wont work with missing fields', () => {
     req2.session = {
       loggedIn: true,
-      id: '123'
+      userId: '123'
     };
     return updatePassword(req2)
     .catch(resp => {
@@ -208,14 +208,14 @@ describe('User functions...', () => {
       expect(resp.status).toBe(202);
       expect(resp.message).toBe('Logged In');
       expect(resp.req.session.loggedIn).toBe(true);
-      expect(resp.req.session.id).toBe(id);
+      expect(resp.req.session.userId).toBe(id);
     });
   });
 
-  test('deleteUser: it deletes the test user', () => {
-    return deleteUser(id)
-    .then(resp => {
-      expect(resp).toBe('hello');
-    });
-  });
+//   test('deleteUser: it deletes the test user', () => {
+//     return deleteUser(id)
+//     .then(resp => {
+//       expect(resp).toBe('hello');
+//     });
+//   });
 });

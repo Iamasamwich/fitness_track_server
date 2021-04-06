@@ -2,7 +2,7 @@ module.exports = (req) => {
   
   async function logout () {
     delete req.session.loggedIn;
-    delete req.session.id;
+    delete req.session.userId;
     return ({status: 200, message: 'Logged Out', req});
   };
 
