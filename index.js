@@ -19,6 +19,7 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+  console.log(req.method);
   console.log(req.session);
   console.log(req.ip);
   next();
