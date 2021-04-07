@@ -15,12 +15,14 @@ module.exports = (req) => {
       !req.body.name ||
       !req.body.pword
     ) throw error(406);
+
     if (
       !typing(req.body.name, 'string') ||
       !typing(req.body.email, 'string') ||
       !typing(req.body.pword, 'string')
     ) throw error(406);
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.email)) throw error(406);
+    
     return;
   }
 

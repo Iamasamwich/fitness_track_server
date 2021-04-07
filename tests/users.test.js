@@ -56,6 +56,26 @@ describe('User functions...', () => {
       expect(resp.message).toBe('Not Acceptable');
     });
   });
+
+  test('addUser: it works with a suffix on the email', () => {
+    req.body = {
+      email: 'testAddUser@test.com.au',
+      name: 'Added User',
+      pword: 'password'
+    };
+    return logout(req)
+    .then(() => addUser(req))
+    .then(resp => {
+      
+      expect(resp.status).toBe(201)
+      expect(resp.message).toBe('User Added');
+      return resp.req.session.userId;
+    })
+    // .then(id => deleteUser(id))
+    .catch(err => {
+      console.log(err);
+    })
+  })
   
   test('addUser: it lets you add a user', () => {
     req.body = {
@@ -212,10 +232,10 @@ describe('User functions...', () => {
     });
   });
 
-//   test('deleteUser: it deletes the test user', () => {
-//     return deleteUser(id)
-//     .then(resp => {
-//       expect(resp).toBe('hello');
-//     });
-//   });
+  test('deleteUser: it deletes the test user', () => {
+    return deleteUser(id)
+    .then(resp => {
+      expect(resp).toBe('hello');
+    });
+  });
 });
