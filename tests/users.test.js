@@ -66,16 +66,12 @@ describe('User functions...', () => {
     return logout(req)
     .then(() => addUser(req))
     .then(resp => {
-      
       expect(resp.status).toBe(201)
       expect(resp.message).toBe('User Added');
       return resp.req.session.userId;
     })
-    // .then(id => deleteUser(id))
-    .catch(err => {
-      console.log(err);
-    })
-  })
+    .then(id => deleteUser(id))
+  });
   
   test('addUser: it lets you add a user', () => {
     req.body = {
