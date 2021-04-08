@@ -1,4 +1,5 @@
 const login = require('../models/users/login');
+const logout = require('../models/users/logout');
 const addUser = require('../models/users/addUser');
 
 module.exports = {
@@ -21,6 +22,15 @@ module.exports = {
       status: err.status,
       message: err.message
     }));
+  },
+  logout(req, res) {
+    logout(req)
+    .then(resp => {
+      return res.status(resp.status).json({
+        status: resp.status,
+        message: resp.message
+      });
+    });
   },
   signup(req, res) {
     addUser(req)

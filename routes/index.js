@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   //all users
   app.get('/', userscontroller.ping);
+  app.post('/logout', userscontroller.logout);
   app.post('/login', userscontroller.login);
   app.post('/signup', userscontroller.signup);
 
