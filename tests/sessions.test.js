@@ -231,6 +231,22 @@ describe('Session functions...', () => {
     });
   });
 
+  test('createSession: it converts stringed numbers to numbers', () => {
+    req.body = {
+      date: makeDate(0),
+      distance: '12.25',
+      time: '1800',
+      weight: '72',
+      route: 'JSBL',
+      notes: 'No magpies today'
+    };
+    return addSession(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+    });
+  });
+
+
   test('delete the test user', () => {
     return deleteUser(req.session.userId)
     .then(resp => {

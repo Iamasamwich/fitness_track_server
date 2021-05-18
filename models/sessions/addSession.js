@@ -24,6 +24,14 @@ module.exports = (req) => {
       !req.body.notes
     ) throw error (406);
 
+    if (!isNaN(req.body.distance) && !isNaN(req.body.time) && !isNaN(req.body.weight)) {
+      req.body.distance = Number(req.body.distance);
+      req.body.time = Number(req.body.time);
+      req.body.weight = Number(req.body.weight);
+    } else {
+      throw error(406);
+    };
+
     if (
       !typing(req.body, 'object') ||
       !typing(req.body.date, 'string') ||

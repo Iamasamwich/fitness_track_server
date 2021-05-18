@@ -1,5 +1,6 @@
 const path = require('path');
 const userscontroller = require('../controllers').users;
+const sessionscontroller = require('../controllers').sessions;
 
 
 module.exports = (app) => {
@@ -11,6 +12,8 @@ module.exports = (app) => {
   app.post('/signup', userscontroller.signup);
 
   //restricted to logged in
+  app.post('/createsession', sessionscontroller.create);
+  app.get('/getmonthsessions', sessionscontroller.getMonthSessions);
 
   //catchall
   app.all('*', (req, res) => {
