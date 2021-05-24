@@ -14,6 +14,7 @@ module.exports = (app) => {
   //restricted to logged in
   app.post('/createsession', sessionscontroller.create);
   app.get('/getmonthsessions', sessionscontroller.getMonthSessions);
+  app.get('/getallsessions', sessionscontroller.getAllSessions);
 
   //catchall
   app.all('*', (req, res) => {
