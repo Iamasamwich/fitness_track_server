@@ -1,6 +1,7 @@
 const Conn = require('../../db_conn');
 const error = require('../logic/error');
 const makeDate = require('../logic/makeDate');
+const addSpeed = require('../logic/addSpeedToSessions');
 
 module.exports = (req) => {
   const conn = new Conn();
@@ -30,16 +31,6 @@ module.exports = (req) => {
     });
     return stringedResp;
   };
-
-  async function addSpeed(sessions) {
-    console.log(sessions);
-    const sessionsWithSpeed = sessions.map(session => {
-      const kmph = session.distance / (session.time / 3600);
-      const speed = Math.round((kmph + Number.EPSILON) * 100) / 100;
-      return {...session, speed}
-    });
-    return sessionsWithSpeed;
-  }
 
   return validate()
   .then(() => makeDate(0))

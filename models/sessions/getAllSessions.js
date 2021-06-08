@@ -1,5 +1,6 @@
 const Conn = require('../../db_conn');
 const error = require('../logic/error');
+const addSpeedToSessions = require('../logic/addSpeedToSessions');
 
 module.exports = (req) => {
   const conn = new Conn();
@@ -30,6 +31,7 @@ module.exports = (req) => {
 
   return validate()
   .then(() => getSessions())
+  .then(addSpeedToSessions)
   .then(resp => ({status: 200, message: 'Sessions Retrieved', sessions: resp}))
   .catch(err => {
     throw err;
