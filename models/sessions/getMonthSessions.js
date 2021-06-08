@@ -31,9 +31,20 @@ module.exports = (req) => {
     return stringedResp;
   };
 
+  async function addSpeed(sessions) {
+    console.log(sessions);
+    const sessionsWithSpeed = sessions.map(session => {
+      const kmph = session.distance / (session.time / 3600);
+      const speed = Math.round((kmph + Number.EPSILON) * 100) / 100;
+      return {...session, speed}
+    });
+    return sessionsWithSpeed;
+  }
+
   return validate()
   .then(() => makeDate(0))
   .then(nowDate => getSessions(nowDate))
+  .then(sessions => addSpeed(sessions))
   .then(resp => ({status: 200, message: 'Sessions Retrieved', sessions: resp}))
   .catch(err => {
     throw err;
