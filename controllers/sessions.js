@@ -18,6 +18,15 @@ module.exports = {
 
   getMonthSessions(req, res) {
     getMonthSessions(req)
+    .then(resp => {
+      const newResp = {...resp};
+      newResp.sessions = newResp.sessions.map((session, i) => {
+        session.index = i;
+        delete session.id;
+        return session;
+      });
+      return newResp;
+    })
     .then(resp => res.status(resp.status).json({
       status: resp.status,
       message: resp.message,
@@ -31,6 +40,15 @@ module.exports = {
 
   getAllSessions(req, res) {
     getAllSessions(req)
+    .then(resp => {
+      const newResp = {...resp};
+      newResp.sessions = newResp.sessions.map((session, i) => {
+        session.index = i;
+        delete session.id;
+        return session;
+      });
+      return newResp;
+    })
     .then(resp => res.status(resp.status).json({
       status: resp.status,
       message: resp.message,
