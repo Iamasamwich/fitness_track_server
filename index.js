@@ -26,7 +26,8 @@ app.use((req, res, next) => {
 });
 
 const whiteListOrigins = [
-  'http://localhost:3000',  //the server
+  'https://localhost:3000',  //the server,
+  'http://localhost:3000', //the server, just http
   'http://localhost:3001',  //where my dev app will sit
   'null', //lets me access from files opened in chrome
   'http://localhost:52330', //for opening page from vscode
@@ -39,11 +40,13 @@ app.use(cors({
     if (whiteListOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('Not acceptable origin'));
+      callback(new Error('Not acceptable origin: ' + origin));
     }
   },
   credentials: true
 }));
+
+app.use(express.static('public'));
 
 const port = 3000;
 
