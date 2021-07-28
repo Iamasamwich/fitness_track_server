@@ -5,6 +5,14 @@ const https = require('https');
 const fs = require('fs');
 
 const app = express ();
+
+// add 1 second delay to show loading screen...
+app.use((req, res, next) => {
+  setTimeout(() => {
+    next();
+  }, 1000);
+});
+
 app.use(express.json());
 
 app.use(session({
