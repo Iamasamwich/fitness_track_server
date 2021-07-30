@@ -27,7 +27,6 @@ module.exports = {
       });
       return newResp;
     })
-    // .then(resp => res.status(404).json({message: 'hello'}))
     .then(resp => res.status(resp.status).json({
       status: resp.status,
       message: resp.message,
