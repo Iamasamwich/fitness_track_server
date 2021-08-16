@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 const whiteListOrigins = [
   'https://localhost:3000',  //the server,
-  'http://localhost:3000', //the server, just http
+  'http://localhost:3000', //the server, just http,
   'http://localhost:3001',  //where my dev app will sit
   'null', //lets me access from files opened in chrome
   'http://localhost:52330', //for opening page from vscode

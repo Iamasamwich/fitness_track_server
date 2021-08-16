@@ -44,8 +44,7 @@ describe('Session functions...', () => {
       distance: 'abc',
       time: 'abc',
       weight: 'abc',
-      route: true,
-      notes: 123,
+      route: true
     };
     return addSession(req)
     .catch(resp => {
@@ -60,8 +59,7 @@ describe('Session functions...', () => {
       distance: 123,
       time: 123,
       weight: 123,
-      route: 'abc',
-      notes: 'abc'
+      route: 'abc'
     };
     return addSession(req)
     .catch(resp => {
@@ -92,8 +90,7 @@ describe('Session functions...', () => {
         distance: 12.25,
         time: 1800,
         weight: 72,
-        route: 'JSBL',
-        notes: 'No magpies today'
+        route: 'JSBL'
       } 
     };
     return addSession(req2)
@@ -123,8 +120,7 @@ describe('Session functions...', () => {
       distance: 12.25,
       time: 1800,
       weight: 72,
-      route: 'JSBL',
-      notes: 'No magpies today'
+      route: 'JSBL'
     };
     return addSession(req)
     .then(resp => {
@@ -192,11 +188,10 @@ describe('Session functions...', () => {
   test('editSession: it lets you edit a session', () => {
     req = {...req, body: sessionToEdit};
     req.body.date = makeDate(365);
-    req.body.distance = 300,
-    req.body.time = 500000,
-    req.body.weight = 75,
+    req.body.distance = 300;
+    req.body.time = 500000;
+    req.body.weight = 75;
     req.body.route = "To the moon and back";
-    req.body.notes = "not a lot of air up there..."
     
     return editSession(req)
     .then(resp => {
@@ -237,8 +232,7 @@ describe('Session functions...', () => {
       distance: '12.25',
       time: '1800',
       weight: '72',
-      route: 'JSBL',
-      notes: 'No magpies today'
+      route: 'JSBL'
     };
     return addSession(req)
     .then(resp => {

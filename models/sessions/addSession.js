@@ -20,8 +20,7 @@ module.exports = (req) => {
       !req.body.distance ||
       !req.body.time ||
       !req.body.weight ||
-      !req.body.route ||
-      !req.body.notes
+      !req.body.route
     ) throw error (406);
 
     if (!isNaN(req.body.distance) && !isNaN(req.body.time) && !isNaN(req.body.weight)) {
@@ -38,8 +37,7 @@ module.exports = (req) => {
       !typing(req.body.distance, 'number') ||
       !typing(req.body.time, 'number') ||
       !typing(req.body.weight, 'number') ||
-      !typing(req.body.route, 'string') ||
-      !typing(req.body.notes, 'string')
+      !typing(req.body.route, 'string')
     ) throw error (406);
     
     if (
@@ -70,8 +68,7 @@ module.exports = (req) => {
       distance: req.body.distance,
       time: req.body.time,
       weight: req.body.weight,
-      route: req.body.route,
-      notes: req.body.notes
+      route: req.body.route
     };
     const resp = await conn.send(m,p);
     return;
