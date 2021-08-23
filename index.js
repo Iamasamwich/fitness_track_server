@@ -6,12 +6,14 @@ const fs = require('fs');
 
 const app = express ();
 
-// add 1 second delay to show loading screen...
-app.use((req, res, next) => {
-  setTimeout(() => {
-    next();
-  }, 250);
-});
+console.log(process.env.PORT);
+
+// // add 1 second delay to show loading screen...
+// app.use((req, res, next) => {
+//   setTimeout(() => {
+//     next();
+//   }, 250);
+// });
 
 app.use(express.json());
 
