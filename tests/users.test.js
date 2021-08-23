@@ -35,7 +35,8 @@ describe('User functions...', () => {
     req.body = {
       email: 123,
       name: 123,
-      pword: 123
+      pword: 123,
+      tandc: 123
     };
     return addUser(req)
     .catch(resp => {
@@ -48,7 +49,8 @@ describe('User functions...', () => {
     req.body = {
       email: 'helloatemail.com',
       name: 'wrong email format',
-      pword: 'wrong email format'
+      pword: 'wrong email format',
+      tandc: '1.0'
     };
     return addUser(req)
     .catch(resp => {
@@ -61,7 +63,8 @@ describe('User functions...', () => {
     req.body = {
       email: 'testAddUser@test.com.au',
       name: 'Added User',
-      pword: 'password'
+      pword: 'password',
+      tandc: '1.0'
     };
     return logout(req)
     .then(() => addUser(req))
@@ -78,6 +81,7 @@ describe('User functions...', () => {
       email: 'testAddUser@test.com',
       name: 'Added User',
       pword: 'password',
+      tandc: '1.0'
     };
     return logout(req)
     .then(() => addUser(req))

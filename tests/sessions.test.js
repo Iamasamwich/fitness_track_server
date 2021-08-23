@@ -73,7 +73,8 @@ describe('Session functions...', () => {
       body: {
         email: 'addSessionTest@test.com',
         name: 'test',
-        pword: 'hello'
+        pword: 'hello',
+        tandc: 'test'
       }
     };
     return addUser(req)

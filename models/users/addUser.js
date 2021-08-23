@@ -13,13 +13,15 @@ module.exports = (req) => {
       !req.body ||
       !req.body.email ||
       !req.body.name ||
-      !req.body.pword
+      !req.body.pword ||
+      !req.body.tandc
     ) throw error(406);
 
     if (
       !typing(req.body.name, 'string') ||
       !typing(req.body.email, 'string') ||
-      !typing(req.body.pword, 'string')
+      !typing(req.body.pword, 'string') ||
+      !typing(req.body.tandc, 'string')
     ) throw error(406);
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.email)) throw error(406);
     
@@ -46,7 +48,8 @@ module.exports = (req) => {
       name: req.body.name,
       pword: bcrypt.hashSync(req.body.pword, 10, (err, pwHash) => {
         return pwHash;
-      })
+      }),
+      tandc: req.body.tandc
     };
     const resp = await conn.send(m, p);
     req.session.userId = id;
