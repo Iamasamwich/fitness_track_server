@@ -9,13 +9,6 @@ const app = express ();
 
 console.log(process.env.PORT);
 
-// // add 1 second delay to show loading screen...
-// app.use((req, res, next) => {
-//   setTimeout(() => {
-//     next();
-//   }, 250);
-// });
-
 app.use(express.json());
 
 app.use(session({
@@ -73,9 +66,4 @@ https.createServer({
   console.log('listening on port 3000');
 });
 
-// http.createServer(
-//   app
-// ).listen(3000, () => {
-//   console.log('listening on port 3000');
-// })
 
