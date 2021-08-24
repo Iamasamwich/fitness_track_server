@@ -2,12 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const https = require('https');
-const http = require('http');
 const fs = require('fs');
+require('dotenv').config();
 
 const app = express ();
-
-console.log(process.env.PORT);
 
 app.use(express.json());
 
@@ -23,13 +21,12 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-  console.log(req.method, req.originalUrl);
-  console.log(req.session);
-  console.log(req.ip);
+  console.log('method', req.method, 'url', req.originalUrl, 'ip', req.ip);
   next();
 });
 
 const whiteListOrigins = [
+  `${process.env.HOST}:${process.env.PORT}`,
   'https://localhost:3000',  //the server,
   'http://localhost:3000', //the server, just http,
   'http://localhost:3001',  //where my dev app will sit
@@ -54,16 +51,17 @@ app.use(cors({
 
 app.use(express.static('public'));
 
-const port = 3000;
-
 require('./routes')(app);
+
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || "localhost";
 
 https.createServer({
   key: fs.readFileSync('fitrack.key'),
   cert: fs.readFileSync('fitrack.crt')
 }, app)
-.listen(3000, () => {
-  console.log('listening on port 3000');
+.listen(port, () => {
+  console.log(`listening to ${host}:${port}`);
 });
 
 

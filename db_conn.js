@@ -3,17 +3,18 @@ const mysql = require('mysql');
 class Conn {
   constructor() {
     this.config = {
-      host: "localhost",
-      user: "root",
-      password: "root",
-      database: "FitnessTrack",
-      port: 3306,
+      host: process.env.DBPATH || "localhost",
+      user: process.env.DBUSER || "root",
+      password: process.env.DBPASS || "root",
+      database: process.env.DBNAME || "FitnessTrack",
+      port: process.env.DBPORT || 3306,
       dateStrings: 'date'
     };
     this.conn = mysql.createConnection(this.config);
   }
 
   send(message, payload) {
+    console.log('xx', process.env.HOST);
     return new Promise ((resolve, reject) => {
       this.conn.query(message, payload, (err, res) => {
         if (err) {
