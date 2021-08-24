@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 const app = express ();
@@ -71,4 +72,10 @@ https.createServer({
 .listen(3000, () => {
   console.log('listening on port 3000');
 });
+
+// http.createServer(
+//   app
+// ).listen(3000, () => {
+//   console.log('listening on port 3000');
+// })
 
