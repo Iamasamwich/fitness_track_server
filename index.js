@@ -3,7 +3,7 @@ const cors = require('cors');
 const session = require('express-session');
 const https = require('https');
 const fs = require('fs');
-require('dotenv').config();
+// require('dotenv').config();
 
 const app = express ();
 
