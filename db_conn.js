@@ -14,7 +14,6 @@ class Conn {
   }
 
   send(message, payload) {
-    console.log('xx', process.env.HOST);
     return new Promise ((resolve, reject) => {
       this.conn.query(message, payload, (err, res) => {
         if (err) {
