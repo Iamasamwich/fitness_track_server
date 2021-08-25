@@ -51,7 +51,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.static('app/public'));
+app.use(express.static('public'));
 
 require('./routes')(app);
 
