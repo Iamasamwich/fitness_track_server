@@ -9,7 +9,8 @@ const app = express ();
 
 app.use(express.json());
 
-console.log(require('dotenv').config());
+// console.log(require('dotenv').config());
+console.log(process.env);
 
 app.use(session({
   secret: 'blue skies, smiling at meee',
