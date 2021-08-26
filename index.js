@@ -39,6 +39,7 @@ const whiteListOrigins = [
   'null', //lets me access from files opened in chrome
   'http://localhost:52330', //for opening page from vscode
   'https://192.168.43.5:3000', //opening in phone
+  'http://192.168.43.5:3000',
   'http://192.168.43.5:3001', //opening in phone
   null,
   undefined

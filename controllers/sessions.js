@@ -6,6 +6,10 @@ module.exports = {
   create(req, res) {
     req.body.time = ((Number(req.body.hours) * 3600) + (Number(req.body.mins) * 60) + Number(req.body.secs));
     addSession(req)
+    .then(resp => {
+      console.log(resp);
+      return resp;
+    })
     .then(resp => res.status(resp.status).json({
         status: resp.status,
         message: resp.message
