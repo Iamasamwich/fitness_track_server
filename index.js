@@ -43,6 +43,7 @@ const whiteListOrigins = [
   'https://192.168.43.5:3000', //opening in phone
   'http://192.168.43.5:3000',
   'http://192.168.43.5:3001', //opening in phone
+  'https://cycletrack.herokuapp.com',
   null,
   undefined
 ];
