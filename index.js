@@ -2,36 +2,39 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
-// require('dotenv').config();
 
 const app = express ();
-
 app.use(express.json());
-
-// console.log(require('dotenv').config());
-console.log(process.env);
 
 app.use(session({
   secret: 'blue skies, smiling at meee',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    sameSite: 'none',
-    secure: true,
+    sameSite: (process.env.NODE_ENV === "production" ? true : false),
+    secure: (process.env.NODE_ENV === "production" ? true : false),
     maxAge: 1209600000
   }
 }));
 
 app.use((req, res, next) => {
-  console.log('method', req.method, 'url', req.originalUrl, 'ip', req.ip);
+  console.log(`Session ID:      ${req.session.id}`);
+  console.log(`${req.method} ${req.originalUrl}      IP: ${req.ip}`);
+  console.log(`user Id: ${req.session.userId}`);
   next();
 });
 
+app.use(express.static('public'));
+
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || "localhost";
+
 const whiteListOrigins = [
+  `http://${host}:${port}`,
+  `https://${host}:${port}`,
   `${process.env.HOST}:${process.env.PORT}`,
-  'https://localhost:3000',  //the server,
-  'http://localhost:3000', //the server, just http,
   'http://localhost:3001',  //where my dev app will sit
   'null', //lets me access from files opened in chrome
   'http://localhost:52330', //for opening page from vscode
@@ -44,27 +47,28 @@ const whiteListOrigins = [
 app.use(cors({
   origin: function (origin, callback) {
     if (whiteListOrigins.indexOf(origin) !== -1) {
+      console.log('qqqqqqqqqqqqq', origin);
       callback(null, true);
     } else {
+      console.log('not acceptable origin index.js');
       callback(new Error('Not acceptable origin: ' + origin));
     }
   },
   credentials: true
 }));
 
-app.use(express.static('public'));
-
 require('./routes')(app);
 
-const port = process.env.PORT || 3000;
-const host = process.env.HOST || "localhost";
-
-https.createServer({
-  key: fs.readFileSync('fitrack.key'),
-  cert: fs.readFileSync('fitrack.crt')
-}, app)
-.listen(port, () => {
-  console.log(`listening to ${host}:${port}`);
+http.createServer(app).listen(port, () => {
+  console.log(`listening on ${host}:${port} in ${process.env.NODE_ENV} mode`);
 });
+
+// https.createServer({
+//   key: fs.readFileSync('fitrack.key'),
+//   cert: fs.readFileSync('fitrack.crt')
+// }, app)
+// .listen(port, () => {
+//   console.log(`listening to https://${host}:${port}`);
+// });
 
 

@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose --detectOpenHandles --coverage",
-    "start": "pm2 start index.js --watch",
-    "stop": "pm2 delete index"
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "dev": "pm2-runtime start ecosystem.config.js --env development --watch",
+    "stop": "pm2 delete ecosystem.config.js",
+    "heroku-postbuild": "npm install pm2"
   },
   "author": "s humphreys",
   "license": "ISC",
