@@ -44,6 +44,7 @@ const whiteListOrigins = [
   'http://192.168.43.5:3001', //opening in phone
   'https://cycletrack.herokuapp.com',
   'http://cycletrack.herokuapp.com',
+  undefined
 ];
 
 app.use(cors({
