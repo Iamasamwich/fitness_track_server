@@ -30,6 +30,8 @@ app.use(express.static('public'));
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
+console.log('host', process.env.HOST);
+console.log('db path', process.env.DBPATH);
 
 const whiteListOrigins = [
   `http://${host}:${port}`,
