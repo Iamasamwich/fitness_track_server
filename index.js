@@ -49,10 +49,9 @@ const whiteListOrigins = [
 app.use(cors({
   origin: function (origin, callback) {
     if (whiteListOrigins.indexOf(origin) !== -1) {
-      console.log('qqqqqqqqqqqqq', origin);
       callback(null, true);
     } else {
-      console.log('not acceptable origin index.js');
+      console.log('Unacceptable origin -----> ', origin);
       callback(new Error('Not acceptable origin: ' + origin));
     }
   },
