@@ -13,8 +13,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    sameSite: (process.env.NODE_ENV === "production" ? true : false),
-    secure: (process.env.NODE_ENV === "production" ? true : false),
+    sameSite: false,
+    secure: false,
     maxAge: 1209600000
   }
 }));
