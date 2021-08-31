@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const https = require('https');
+// const https = require('https');
 const http = require('http');
-const fs = require('fs');
+// const fs = require('fs');
 
 const app = express ();
 app.use(express.json());
@@ -30,8 +30,6 @@ app.use(express.static('public'));
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
-console.log('host', process.env.HOST);
-console.log('db path', process.env.DBPATH);
 
 const whiteListOrigins = [
   `http://${host}:${port}`,

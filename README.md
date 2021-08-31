@@ -31,6 +31,12 @@ Note: This guide is written with linux command lines...
 ### Prerequisites
 You will need to have Node, NPM, and MySQL installed on your computer.
 
+You can check this by running these commands
+
+`which node && which npm && which mysql`
+
+If the pathnames come up for each program then you're good to go!
+
 ### Local running:
 * Create a folder called CycleTracker and change to that directory (you can call it whatever you want...)
 
@@ -41,6 +47,12 @@ You will need to have Node, NPM, and MySQL installed on your computer.
 Note - you will need to have a Bitbucket account and [ask me](mailto:sam@iamasamwich.com) for access to the code.
 
 `git clone https://[your bitbucket ID]@bitbucket.org/iamasamwich/fitnesstrackerserver.git`
+
+* Once that has finished downloading, change to that directory and install the NPM packages
+
+`cd fitnesstrackerserver && npm install`
+
+* 
 
 
 

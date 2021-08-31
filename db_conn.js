@@ -3,11 +3,12 @@ const mysql = require('mysql');
 class Conn {
   constructor() {
     this.config = {
-      host: process.env.DBPATH || "localhost",
-      user: process.env.DBUSER || "root",
-      password: process.env.DBPASS || "root",
-      database: process.env.DBNAME || "FitnessTrack",
+      host: process.env.DBPATH,
+      user: process.env.DBUSER,
+      password: process.env.DBPASS,
+      database: process.env.DBNAME,
       port: process.env.DBPORT || 3306,
+
       dateStrings: 'date'
     };
     this.conn = mysql.createConnection(this.config);
