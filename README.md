@@ -82,6 +82,8 @@ mysql> `exit;`
 
 * Do all of the steps for Local Running above as you'll need the API running.
 
+* Open a new terminal window.
+
 * Go to the CycleTracker folder
 
 * Clone the client from Bitbucket
@@ -97,6 +99,8 @@ mysql> `exit;`
 `npm start`
 
 * Now (hopefully) you can see the client running the server generated client on port 3001 and the built production version on port 3000. They both use the server running on port 3000 as their API.
+
+* When you're done, hit Ctrl+C on each of the servers you started to kill them.
 
 ## ToDo
 
