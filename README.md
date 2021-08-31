@@ -6,7 +6,7 @@
 Sam Humphreys
 
 ### Using:
-Server: Express, MySQL, Express-Session, Cors, PM2.Create React App, Redux, Bcrypt, Crypto-JS.
+Server: Express, MySQL, Express-Session, Cors, PM2, Bcrypt, Crypto-JS.
 
 Client: React, React-Redux, Redux-Thunk, Semantic UI, Semantic-UI-Calendar-React, Recharts.
 
@@ -31,7 +31,7 @@ Note: This guide is written with linux command lines...
 ### Prerequisites
 You will need to have Node, NPM, and MySQL installed on your computer.
 
-You can check this by running these commands
+You can check this by running these commands in a terminal
 
 `which node && which npm && which mysql`
 
@@ -52,7 +52,31 @@ Note - you will need to have a Bitbucket account and [ask me](mailto:sam@iamasam
 
 `cd fitnesstrackerserver && npm install`
 
-* 
+* Open MySQL in your terminal, then enter the password when it prompts you.
+
+`mysql -u [your mysql user name] -p`
+
+* Create a database, then exit. Call the database whatever you want, maybe CycleTracker.
+
+mysql> `CREATE DATABASE [Database Name];`
+
+mysql> `exit;`
+
+* Import the empty database to your local MySQL
+
+`mysql -u [your mysql user name] -p [Database Name] < CycleTrackEmpty.sql`
+
+* Modify this line in package.json to use your local settings
+
+`"dev": "DBPATH=localhost DBUSER=[your local MySQL user name] DBPASS=[your local MySQL password] DBNAME=[Database Name] DBPORT=[Your local MySQL port] pm2-runtime start ecosystem.config.js --env development --watch",`
+
+* Now start the development server
+
+`npm run dev`
+
+
+
+
 
 
 
