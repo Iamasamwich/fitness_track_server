@@ -6,7 +6,7 @@
 Sam Humphreys
 
 ### Using:
-Server: Express, MySQL, Express-Session, Cors, PM2, Bcrypt, Crypto-JS.
+Server: Node, Express, MySQL, Express-Session, Cors, PM2, Bcrypt, Crypto-JS.
 
 Client: React, React-Redux, Redux-Thunk, Semantic UI, Semantic-UI-Calendar-React, Recharts.
 
@@ -15,6 +15,8 @@ Client: React, React-Redux, Redux-Thunk, Semantic UI, Semantic-UI-Calendar-React
 This app is designed to track fitness progression over time. It was designed with cycling in mind, but could be used for any activity that primarily tracks distance and time, such as running or swimming. 
 
 The app is designed to be used on a mobile phone in profile view. Some styling has been done to make it work on a tablet, and on a desktop it will show a background saying that it should be viewed on mobile.
+
+For the best viewing experience, open the app on your phone and add it to your homescreen. This will allow the app to open giving a mobile app experience without the URL bar popping into view.
 
 Once a user has created an account and/or logged in they will be able to add metrics from their workouts, then view the aggregated data in graph form over time.
 
@@ -74,14 +76,33 @@ mysql> `exit;`
 
 `npm run dev`
 
+* Open your browser to http://localhost:3000 to use the app
 
+### Running the client locally (react development)
 
+* Do all of the steps for Local Running above as you'll need the API running.
 
+* Go to the CycleTracker folder
 
+* Clone the client from Bitbucket
 
+`git clone https://[your Bitbucket name]@bitbucket.org/iamasamwich/fitnesstrackerclient.git`
+
+* Change to the client folder and install the packages
+
+`cd fitnesstrackerclient && npm install`
+
+* Once that has downloaded the packages you can start the client server. Note, you will need to have the API server running on port 3000, and the client server will prompt you to start on port 3001... say yes!
+
+`npm start`
+
+* Now (hopefully) you can see the client running the server generated client on port 3001 and the built production version on port 3000. They both use the server running on port 3000 as their API.
 
 ## ToDo
 
 * Prevent "get all session data" from show all if there are no sessions
 * Restrict distance input to maxiumum 1000km (currently regexes for 3 numbers, then 0 or 1 decimal, then three numbers, so users can input 999999).
 * HTTPS to server - this requires a security certificate which I don't want to pay for ¯\\\_(ツ)\_/¯
+* Add Heroku deployment instructions to readme.
+
+
