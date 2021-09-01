@@ -8,6 +8,8 @@ const http = require('http');
 const app = express ();
 app.use(express.json());
 
+console.log(process.env.DBPATH, process.env.DBUSER, process.env.DBPASS, process.env.DBNAME, process.env.DBPORT);
+
 app.use(session({
   secret: 'blue skies, smiling at meee',
   resave: false,

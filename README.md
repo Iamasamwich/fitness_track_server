@@ -104,9 +104,11 @@ mysql> `exit;`
 
 ## ToDo
 
-* Prevent "get all session data" from show all if there are no sessions
+* <s>Prevent "get all session data" from show all if there are no sessions</s>
 * Restrict distance input to maxiumum 1000km (currently regexes for 3 numbers, then 0 or 1 decimal, then three numbers, so users can input 999999).
 * HTTPS to server - this requires a security certificate which I don't want to pay for ¯\\\_(ツ)\_/¯
 * Add Heroku deployment instructions to readme.
+* Add an option to the nav bar to look at the loading screen, because I like it :)
+* Clicking navbar will clear status
 
 
