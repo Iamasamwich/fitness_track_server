@@ -4,7 +4,7 @@
   "description": "A basic node server",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles --coverage",
+    "test": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 jest --verbose --detectOpenHandles --coverage",
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 pm2-runtime start ecosystem.config.js --env development --watch",
     "stop": "pm2 delete ecosystem.config.js",

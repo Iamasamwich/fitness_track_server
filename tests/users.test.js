@@ -6,10 +6,9 @@ const deleteUser = require('../models/users/deleteUser');
 let id;
 
 let req = {
-      session: {},
-      body: {}
-    };
-
+  session: {},
+  body: {}
+};
 
 describe('User functions...', () => {
   test('logout: it lets you log out', () => {
