@@ -68,15 +68,21 @@ mysql> `exit;`
 
 `mysql -u [your mysql user name] -p [Database Name] < CycleTrackEmpty.sql`
 
-* Modify this line in package.json to use your local settings
+* Modify these 2 lines in /package.json to update the your local MySQL username, password, and port the database name you created, use your local settings
 
-`"dev": "DBPATH=localhost DBUSER=[your local MySQL user name] DBPASS=[your local MySQL password] DBNAME=[Database Name] DBPORT=[Your local MySQL port] pm2-runtime start ecosystem.config.js --env development --watch",`
+`"test": "DBPATH=localhost DBUSER=[your local MySQL user name] DBPASS=[your local MySQL password] DBPORT=[Your local MySQL port] DBNAME=[Database Name] COOKIE=cookie jest --verbose --detectOpenHandles --coverage",`
+
+`"dev": "DBPATH=localhost DBUSER=[your local MySQL user name] DBPASS=[your local MySQL password] DBPORT=[Your local MySQL port] DBNAME=[Database Name] pm2-runtime start ecosystem.config.js --env development --watch",`
+
+* You can run the unit tests by running (hopefully everything passes....) 
+
+`npm run test`
 
 * Now start the development server
 
 `npm run dev`
 
-* Open your browser to http://localhost:3000 to use the app
+* Open your browser to http://localhost:3000 to use the app. Remember that it is designed for mobile....
 
 ### Running the client locally (react development)
 
