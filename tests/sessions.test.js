@@ -241,7 +241,6 @@ describe('Session functions...', () => {
     });
   });
 
-
   test('delete the test user', () => {
     return deleteUser(req.session.userId)
     .then(resp => {

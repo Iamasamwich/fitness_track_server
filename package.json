@@ -4,9 +4,9 @@
   "description": "A basic node server",
   "main": "index.js",
   "scripts": {
-    "test": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 jest --verbose --detectOpenHandles --coverage",
+    "test": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 COOKIE=cookie jest --verbose --detectOpenHandles --coverage",
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "dev": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 pm2-runtime start ecosystem.config.js --env development --watch",
+    "dev": "DBPATH=localhost DBUSER=root DBPASS=root DBNAME=FitnessTrack DBPORT=3306 COOKIE=cookie pm2-runtime start ecosystem.config.js --env development --watch",
     "stop": "pm2 delete ecosystem.config.js",
     "heroku-postbuild": "npm install pm2"
   },

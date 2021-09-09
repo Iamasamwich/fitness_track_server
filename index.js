@@ -9,7 +9,7 @@ const app = express ();
 app.use(express.json());
 
 app.use(session({
-  secret: 'blue skies, smiling at meee',
+  secret: process.env.COOKIE,
   resave: false,
   saveUninitialized: true,
   cookie: {
