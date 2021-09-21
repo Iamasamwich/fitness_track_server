@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-// const https = require('https');
 const http = require('http');
+// const https = require('https');
 // const fs = require('fs');
 
 const app = express ();
@@ -35,8 +35,6 @@ const whiteListOrigins = [
   `http://${host}:${port}`,
   `https://${host}:${port}`,
   `${process.env.HOST}:${process.env.PORT}`,
-  'http://localhost:3001',  //where my dev app will sit
-  'http://localhost:52330', //for opening page from vscode
   'https://192.168.43.5:3000', //opening in phone
   'http://192.168.43.5:3000',
   'http://192.168.43.5:3001', //opening in phone

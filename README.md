@@ -110,9 +110,10 @@ mysql> `exit;`
 
 ## ToDo
 
+* Edit sessions - button to appear when viewing session data to edit or delete a session.
 * HTTPS to server - this requires a security certificate which I don't want to pay for ¯\\\_(ツ)\_/¯
 * Add Heroku deployment instructions to readme.
 * Add an option to the nav bar to look at the loading screen, because I like it :)
-* <s>Clicking navbar will clear status</s>
-* <s>Prevent "get all session data" from show all if there are no sessions</s>
-* <s>Restrict distance input to maxiumum 1000km (currently regexes for 3 numbers, then 0 or 1 decimal, then three numbers, so users can input 999999).</s>
+* ~~Clicking navbar will clear status~~
+* ~~Prevent "get all session data" from show all if there are no sessions~~
+* ~~Restrict distance input to maxiumum 1000km (currently regexes for 3 numbers, then 0 or 1 decimal, then three numbers, so users can input 999999).~~
